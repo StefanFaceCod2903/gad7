@@ -25,9 +25,11 @@ Future<void> main() async {
       EpicMiddleware<AppState>(epics.epic),
     ],
   );
-  runApp(GroupApp(
-    store: store,
-  ));
+  runApp(
+    GroupApp(
+      store: store,
+    ),
+  );
 }
 
 class GroupApp extends StatelessWidget {

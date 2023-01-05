@@ -8,18 +8,25 @@ part of models;
 
 _$AppState$ _$$AppState$FromJson(Map<String, dynamic> json) => _$AppState$(
       auth: json['auth'] == null ? const AuthState() : AuthState.fromJson(json['auth'] as Map<String, dynamic>),
+      location: json['location'] == null
+          ? const LocationState()
+          : LocationState.fromJson(json['location'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$AppState$ToJson(_$AppState$ instance) => <String, dynamic>{
       'auth': instance.auth,
+      'location': instance.location,
     };
 
 _$AuthState$ _$$AuthState$FromJson(Map<String, dynamic> json) => _$AuthState$(
       user: json['user'] == null ? null : AppUser.fromJson(json['user'] as Map<String, dynamic>),
+      users: (json['users'] as List<dynamic>?)?.map((e) => AppUser.fromJson(e as Map<String, dynamic>)).toList() ??
+          const <AppUser>[],
     );
 
 Map<String, dynamic> _$$AuthState$ToJson(_$AuthState$ instance) => <String, dynamic>{
       'user': instance.user,
+      'users': instance.users,
     };
 
 _$AppUser$ _$$AppUser$FromJson(Map<String, dynamic> json) => _$AppUser$(
@@ -34,4 +41,27 @@ Map<String, dynamic> _$$AppUser$ToJson(_$AppUser$ instance) => <String, dynamic>
       'email': instance.email,
       'displayName': instance.displayName,
       'imageUrl': instance.imageUrl,
+    };
+
+_$UserLocation$ _$$UserLocation$FromJson(Map<String, dynamic> json) => _$UserLocation$(
+      lat: (json['lat'] as num?)?.toDouble(),
+      lng: (json['lng'] as num?)?.toDouble(),
+      uid: json['uid'] as String?,
+    );
+
+Map<String, dynamic> _$$UserLocation$ToJson(_$UserLocation$ instance) => <String, dynamic>{
+      'lat': instance.lat,
+      'lng': instance.lng,
+      'uid': instance.uid,
+    };
+
+_$LocationState$ _$$LocationState$FromJson(Map<String, dynamic> json) => _$LocationState$(
+      locations: (json['locations'] as List<dynamic>?)
+              ?.map((e) => UserLocation.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <UserLocation>[],
+    );
+
+Map<String, dynamic> _$$LocationState$ToJson(_$LocationState$ instance) => <String, dynamic>{
+      'locations': instance.locations,
     };
